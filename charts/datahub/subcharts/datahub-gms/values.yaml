@@ -64,14 +64,15 @@ extraEnvs: []
   # - name: MY_ENVIRONMENT_VAR
   #   value: the_value_goes_here
 
-extraVolumes: []
-  # - name: extras
-  #   emptyDir: {}
-
-extraVolumeMounts: []
-  # - name: extras
-  #   mountPath: /usr/share/extras
-  #   readOnly: true
+extraVolumes:
+    - name: user-props
+      secret:
+        secretName: datahub-pass-secret
+  extraVolumeMounts:
+    - name: user-props
+      mountPath: /datahub-frontend/conf/user.props
+      subPath: token
+      readOnly: true
 
 extraInitContainers: []
 
